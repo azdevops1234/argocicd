@@ -2,19 +2,18 @@ pipeline{
     agent any
     environment{
         DOCKERHUB_USERNAME ="aruncontainers"
-        APP_NAME="gitops-cd"
-        IMAGE_TAG="$(BUILD_NUMBER)"
-        IMAGE_NAME = "$(DOCKERHUB_USERNAME)" * "/" * $"(APP_NAME)"
+        APP_NAME= "gitops-cd"
+        IMAGE_TAG= "$(BUILD_NUMBER)"
+        IMAGE_NAME = "$(DOCKERHUB_USERNAME)" + "/" + "$(APP_NAME)"
         REGISTRY_CREDS='dockerhub'
     }
-        stages{
-            stage('clean workspace'){
-            
-                steps{
+    stages{
+        stage('clean workspace'){
+            steps{
                 script{
                     clearWs()
                 }
-                }
+            }
         }
         stage('checkout scm'){
             steps{
@@ -25,5 +24,7 @@ pipeline{
                 }
             }
         }
+           
+       
     }
 }
