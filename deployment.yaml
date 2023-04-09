@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name:  flask-app-container
-        image:  aruncontainers/gitops-cd:v1
+        image:  aruncontainers/gitops-cd:26
         resources:
           requests:
             cpu: 100m
