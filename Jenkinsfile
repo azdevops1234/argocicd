@@ -32,7 +32,7 @@ pipeline{
                 }
             }
         }
-        stage('push image{
+        stage('push image'){
             steps{
                 script{
                     docker.withRegistry('',REGISTRY_CREDS)(
