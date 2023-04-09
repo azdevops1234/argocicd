@@ -25,6 +25,24 @@ pipeline{
             }
         }
            
-       
+        stage('build docker image'){
+            steps{
+                script{
+                    docker_image = docker.build
+                }
+            }
+        }
+        stage('push image{
+            steps{
+                script{
+                    docker.withRegistry('',REGISTRY_CREDS)(
+                        docker_image.push("$BUILD_NUMBER")
+                        docker_image.push('latest')
+                    )
+
+                }
+            }
+
+        }
     }
 }
