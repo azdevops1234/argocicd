@@ -55,11 +55,11 @@ pipeline{
         stage('update deployment file'){
             steps{
                 script{
-                   sh '''
+                   sh """
                     cat deployment.yaml
                     sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
                     cat deployment.yaml
-                   ''' 
+                   """
                 }
             }
 
@@ -69,7 +69,7 @@ pipeline{
                     script{
                         withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
 
-  sh """
+                        sh """
                         git config --global user.name "azdevops1234"
                         git config --global user.email "azdevops1234@gmail.com"
                         git add deployment.yaml
