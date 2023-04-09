@@ -52,5 +52,34 @@ pipeline{
                 }
             }
         }
+        stage('update deployment file'){
+            steps{
+                script{
+                   sh '''
+                    cat deployment.yaml
+                    sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
+                    cat deployment.yaml
+                   ''' 
+                }
+            }
+
+        }
+        stage('push deployment to git'){
+                steps{
+                    script{
+                        withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
+
+  sh """
+                        git config --global user.name "azdevops1234"
+                        git config --global user.email "azdevops1234@gmail.com"
+                        git add deployment.yaml
+                        git commit -m "updated deployment.yaml"
+                        git push https://github.com/azdevops/argocicd.git Head:main
+                        """  
+                        }
+
+                    }
+                }
+        }
     }
 }
