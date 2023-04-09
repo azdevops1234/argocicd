@@ -28,7 +28,7 @@ pipeline{
         stage('build docker image'){
             steps{
                 script{
-                    docker_image = docker.build
+                    docker_image = docker.build "$(IMAGE_NAME)"
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline{
                 script{
                     docker.withRegistry('',REGISTRY_CREDS)(
                         docker_image.push("$BUILD_NUMBER")
-                        docker_image.push('latest')
+                        docker_image.push{'latest'}
                     )
 
                 }
