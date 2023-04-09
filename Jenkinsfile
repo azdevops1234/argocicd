@@ -4,7 +4,7 @@ pipeline{
         DOCKERHUB_USERNAME = "aruncontainers"
         APP_NAME = "gitops-cd"
         IMAGE_TAG = "${BUILD_NUMBER}" 
-        IMAGE_NAME = "$(DOCKERHUB_USERNAME)" + "/" + "$(APP_NAME)"
+        IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
         REGISTRY_CREDS = "dockerhub"
     }
     stages{
