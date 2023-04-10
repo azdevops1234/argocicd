@@ -74,7 +74,7 @@ pipeline{
                         git config --global user.email "azdevops1234@gmail.com"
                         git add deployment.yaml
                         git commit -m "updated deployment.yaml"
-                        git push https://github.com/azdevops1234/argocicd.git          
+                        git push https://github.com/azdevops1234/argocicd.git HEAD: main         
                         """  
                         }
 
